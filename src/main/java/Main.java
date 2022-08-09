@@ -1,10 +1,12 @@
+import Exception.MyOwnException;
+import Services.CalculateOperation;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws MyOwnException {
-        Calculator calculator = new Calculator();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the first value: ");
+        System.out.print("Enter the second value, please: ");
         int x;
         while (!scanner.hasNextInt()) {
             System.out.println("That's not an integer!\nEnter correct value");
@@ -14,28 +16,15 @@ public class Main {
         System.out.print("Enter the action (+,-,/,*): ");
         String symbol = scanner.next();
 
-        System.out.print("Enter the second value: ");
+        System.out.print("Enter the second value, please: ");
         int y;
         while (!scanner.hasNextInt()) {
             System.out.println("That's not an integer!\nEnter correct value");
             scanner.next();
         }
         y = scanner.nextInt();
-        switch (symbol) {
-            case "+":
-                calculator.addition(x,y);
-                break;
-            case "-":
-                calculator.subtraction(x,y);
-                break;
-            case "*":
-                calculator.multiplication(x,y);
-                break;
-            case "/":
-                calculator.division(x,y);
-                break;
-            default:
-                System.out.println("Incorrect entered math operand");
-        }
+
+        CalculateOperation calculateOperation = new CalculateOperation(symbol, x, y);
+        calculateOperation.calculate();
     }
 }
